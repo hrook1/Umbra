@@ -1,0 +1,22 @@
+[package]
+name = "sp1-program"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "sp1-program"
+path = "src/main.rs"
+
+[dependencies]
+sp1-zkvm = "5.2.3"
+serde = { version = "1.0", default-features = false, features = ["derive"] }
+
+# Core UTXO library (without encryption feature for zkVM - no secp256k1 in zkVM)
+utxo-prototype = { path = "../../core", default-features = false }
+
+# ABI encoding for Solidity-compatible public outputs
+alloy-sol-types = { version = "0.8", default-features = false }
+
+# NOTE: SP1 5.x has built-in precompile acceleration for common crypto operations.
+# The blake3 crate (v1.8.2) used by sp1-primitives benefits from this natively.
+# External patches are only needed for older SP1 versions or unsupported crates.

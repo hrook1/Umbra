@@ -1,0 +1,28 @@
+[package]
+name = "utxo-prototype"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+serde = { version = "1.0.210", features = ["derive"] }
+blake3 = { version = "1.5", default-features = false }
+bincode = "1.3"
+sha2 = { version = "0.10", default-features = false }
+serde-big-array = "0.5"
+
+# Encryption dependencies (optional, only for host)
+aes-gcm = { version = "0.10", optional = true }
+secp256k1 = { version = "0.29", features = ["rand", "global-context"], optional = true }
+rand = { version = "0.8", optional = true }
+k256 = { version = "0.13", features = ["ecdsa", "arithmetic"] }
+sha3 = "0.10"
+hkdf = "0.12.4"
+rand_core = "0.9.3"
+
+[features]
+default = ["encryption"]
+encryption = ["aes-gcm", "secp256k1", "rand"]
+
+[lib]
+name = "utxo_prototype"
+path = "src/lib.rs"
